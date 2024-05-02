@@ -1,3 +1,4 @@
+import 'package:dezigo1/product_detail.dart';
 import 'package:flutter/material.dart';
 
 class Home_page extends StatefulWidget {
@@ -10,7 +11,6 @@ class Home_page extends StatefulWidget {
 class _Home_pageState extends State<Home_page> {
   @override
   Widget build(BuildContext context) {
-
     List<dynamic> imageUrls = [
       "assets/Banner.png",
       "assets/Banner.png",
@@ -46,9 +46,60 @@ class _Home_pageState extends State<Home_page> {
       {
         'image': 'assets/1.png',
         'Text': 'Wishcare Hair growth Serum Concentrate...',
-        'originalPrice' :  '100.0',
-        'double discountedPrice' : '80.0'
-
+        'originalPrice': '100.0',
+        'double discountedPrice': '80.0',
+        'discaunt': '30',
+      },
+      {
+        'image': 'assets/2.png',
+        'Text': 'Wishcare Hair growth Serum Concentrate...',
+        'originalPrice': '100.0',
+        'double discountedPrice': '80.0',
+        'discaunt': '30',
+      },
+      {
+        'image': 'assets/3.png',
+        'Text': 'Wishcare Hair growth Serum Concentrate...',
+        'originalPrice': '100.0',
+        'double discountedPrice': '80.0',
+        'discaunt': '30',
+      },
+      {
+        'image': 'assets/4.png',
+        'Text': 'Wishcare Hair growth Serum Concentrate...',
+        'originalPrice': '100.0',
+        'double discountedPrice': '80.0',
+        'discaunt': '30',
+      },
+    ];
+    List<dynamic> Trending_Products = [
+      {
+        'image': 'assets/6.png',
+        'Text': 'Wishcare Hair growth Serum Concentrate...',
+        'originalPrice': '100.0',
+        'double discountedPrice': '80.0',
+        'discaunt': '30',
+      },
+      {
+        'image': 'assets/5.png',
+        'Text': 'Wishcare Hair growth Serum Concentrate...',
+        'originalPrice': '100.0',
+        'double discountedPrice': '80.0',
+        'discaunt': '30',
+      },
+      {
+        'image': 'assets/6.png',
+        'Text': 'Wishcare Hair growth Serum Concentrate...',
+        'originalPrice': '100.0',
+        'double discountedPrice': '80.0',
+        'discaunt': '30',
+      },
+      {
+        'image': 'assets/7.png',
+        'Text': 'Wishcare Hair growth Serum Concentrate...',
+        'originalPrice': '100.0',
+        'double discountedPrice': '80.0',
+        'discaunt': '30',
       },
     ];
     return Scaffold(
@@ -88,7 +139,7 @@ class _Home_pageState extends State<Home_page> {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               TextFormField(
-                keyboardType: TextInputType.number,
+                //keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search),
                     labelText: ' Search any product..',
@@ -149,24 +200,36 @@ class _Home_pageState extends State<Home_page> {
                   ElevatedButton(onPressed: () {}, child: Text("View All"))
                 ],
               ),
+              SizedBox(
+                height: 20,
+              ),
               GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: Products1.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10.0, // Space between adjacent columns
-                  mainAxisSpacing: 10.0,
-                  mainAxisExtent: 194
-                ),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10.0, // Space between adjacent columns
+                    mainAxisSpacing: 10.0,
+                    mainAxisExtent: 280),
                 itemBuilder: (context, index) {
                   return Container(
-                   // alignment: Alignment.center,
+                    // alignment: Alignment.center,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.asset(
-                          Products1[index]['image'],
-                          fit: BoxFit.cover,
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => (ProductDetail())),
+                            );
+                          },
+                          child: Image.asset(
+                            Products1[index]['image'],
+                            fit: BoxFit.cover,
+                          ),
                         ),
                         SizedBox(
                           height: 10.0,
@@ -175,21 +238,124 @@ class _Home_pageState extends State<Home_page> {
                           Products1[index]['Text'],
                           style: TextStyle(fontSize: 14),
                         ),
-                        Text("₹${600}"),
+                        //    Text("₹${600}"),
+
                         Text(
-                        "₹${Products1[index]["originalPrice"]}",
-                          style: TextStyle(decoration: TextDecoration.lineThrough),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                        "₹${Products1[index]["originalPrice"]}",
+                          "₹${Products1[index]["double discountedPrice"]}",
                           style: TextStyle(fontSize: 20),
                         ),
+                        Row(
+                          children: [
+                            Text(
+                              "₹${Products1[index]["originalPrice"]}",
+                              style: TextStyle(
+                                  decoration: TextDecoration.lineThrough),
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              '${Products1[index]['discaunt'].toString()}% ',
+                              style: TextStyle(color: Colors.green),
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFFC91DA9),
+                                fixedSize: Size(170, 40)),
+                            onPressed: () {},
+                            child: Text(
+                              "Add to Cart",
+                              style: TextStyle(color: Colors.white),
+                            )),
                       ],
                     ),
                   );
                 },
-              )
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Trending Products", style: TextStyle(fontSize: 20)),
+                  ElevatedButton(onPressed: () {}, child: Text("View All"))
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: Trending_Products.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10.0, // Space between adjacent columns
+                    mainAxisSpacing: 10.0,
+                    mainAxisExtent: 280),
+                itemBuilder: (context, index) {
+                  return Container(
+                    // alignment: Alignment.center,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => (ProductDetail())),
+                            );
+                          },
+                          child: Image.asset(
+                            Trending_Products[index]['image'],
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Text(
+                          Trending_Products[index]['Text'],
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        //    Text("₹${600}"),
+
+                        Text(
+                          "₹${Trending_Products[index]["double discountedPrice"]}",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "₹${Trending_Products[index]["originalPrice"]}",
+                              style: TextStyle(
+                                  decoration: TextDecoration.lineThrough),
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              '${Trending_Products[index]['discaunt'].toString()}% ',
+                              style: TextStyle(color: Colors.green),
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFFC91DA9),
+                                fixedSize: Size(170, 40)),
+                            onPressed: () {},
+                            child: Text(
+                              "Add to Cart",
+                              style: TextStyle(color: Colors.white),
+                            )),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ]),
           ),
         ));
