@@ -1,3 +1,5 @@
+import 'package:dezigo1/Categories.dart';
+import 'package:dezigo1/main.dart';
 import 'package:dezigo1/product_detail.dart';
 import 'package:flutter/material.dart';
 
@@ -197,7 +199,12 @@ class _Home_pageState extends State<Home_page> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Hot Seller", style: TextStyle(fontSize: 20)),
-                  ElevatedButton(onPressed: () {}, child: Text("View All"))
+                  ElevatedButton(onPressed: () {
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => (categories()))
+                    );
+                  }, child: Text("View All"))
                 ],
               ),
               SizedBox(

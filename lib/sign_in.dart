@@ -31,8 +31,9 @@ class _sign_inState extends State<sign_in> {
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    labelText: '   Registered Mobile Number',
-                    contentPadding: EdgeInsets.symmetric(vertical: 15.0),
+                   labelText: '   Registered Mobile Number',
+                //  hintText: " Registered Mobile Number",
+                    contentPadding: EdgeInsets.all(16),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30.0))),
               ),
